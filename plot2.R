@@ -1,21 +1,16 @@
-library(dplyr)
-library(lubridate)
-setwd('/Users/xiao_lisp/Desktop/document/程序/')
-power<-read.csv('household_power_consumption.txt',header = TRUE,sep=';')
-subdate<-c(unclass(as.Date(dmy('01/02/2007'))),unclass(as.Date(dmy('02/02/2007'))))
-power1<-power%>%
-    mutate(Date=as.Date(Date,'%d/%m/%Y'))%>%
-    filter(unclass(Date)==subdate[1]|unclass(Date)==subdate[2])%>%
-    mutate(week=wday(Date, label = TRUE, abbr = TRUE))%>%
-    mutate(Time=as.character(Time))%>%
-    mutate(Date=as.character(Date))%>%
-    mutate(Date1=paste(Date,Time,sep=' '))%>%
-    mutate(Global_active_power=as.numeric(as.character(Global_active_power)))
 
-time<-strptime(power1$Date1,'%Y-%m-%d %H:%M:%S')
-t<-time-time[1]
+##set working dir
+setwd('/Users/xiao_lisp/Desktop/document/程序/数据科学课程R programming/')
+
+###read file
+power<-read.csv('household_power_consumption.txt',header = TRUE,sep=';',stringsAsFactors = F)
+
+###subset file and transform Date to Date class
+power1 <- subset(power,power$Date == '1/2/2007'|power$Date=='2/2/2007')
+power1$date1 <- paste(power1$Date,power1$Time,sep=' ')
+power1$date1 <- strptime(power1$date1,'%d/%m/%Y %H:%M:%S')
+
+###plot 2th graph
 png('plot2.png',width = 480,height = 480,units='px')
-plot(t,power1$Global_active_power,type = 'l',xlab ='',ylab = 'Globa Active Power(kilowatts)',axes=F)
-axis(2,c(0,2,4,6),c(0,2,4,6))
-axis(side=1,at =c(0,86370,172740),labels = c('Thu','Fri','Sat'))
+plot(power1$date1,as.numeric(power1$Global_active_power),ylab = 'Globa Active Power(kilowatts)',xlab = '',type='l')
 dev.off()
