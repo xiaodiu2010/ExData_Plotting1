@@ -1,5 +1,5 @@
 
-##set working dir
+##set working dir change
 setwd('/Users/xiao_lisp/Desktop/document/程序/数据科学课程R programming/')
 
 ###read file
