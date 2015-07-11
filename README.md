@@ -89,10 +89,10 @@ GitHub so that the GitHub version of your repository is up to
 date. There should be four PNG files and four R code files.
 
 
-The four plots that you will need to construct are shown below. 
+The four plots that you will need to construct are shown below. (change)
 
 
-### Plot 1
+### Plot 1 
 
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
